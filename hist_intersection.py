@@ -13,30 +13,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
 
-parser = argparse.ArgumentParser(
-     prog='createGFF.py',
-     usage='''python createGFF.py --sample [gene sample file bootstrapped directory] --raxml [name of raxml file for sample]''',
-     description='''calculate 95% CI for a sample''',
-     epilog='''It requires numpy and biopython libraries''')
-parser.add_argument('--sample', type=str, help='The name of the breakpoint file', required=False)
-parser.add_argument('--raxml', type=str, help='name of the fasta fle', required=False)
-
-args=parser.parse_args()
-raxml_tree=args.raxml
-raxml_samples_dir=args.sample
-
 def return_intersection(hist_1, hist_2):
     #intsc=np.sum(np.minimum(x,y))
     minima = np.minimum(hist_1, hist_2)
     intersection = np.true_divide(np.sum(minima), np.sum(hist_2))
     return intersection
-
-def mean_confidence_interval(data, confidence=0.95):
-    a = 1.0 * np.array(data)
-    n = len(a)
-    m, se = np.mean(a), st.sem(a)
-    h = se * st.t.ppf((1 + confidence) / 2., n-1)
-    return (m-h, m+h)
 
 def calcRF(t1,t2):
     tns = dendropy.TaxonNamespace()
@@ -46,8 +27,8 @@ def calcRF(t1,t2):
     tree2.encode_bipartitions()
     return (treecompare.unweighted_robinson_foulds_distance(tree1, tree2))
 
-def compareNeighbors(sample):
-    samplePath="/home/FCAM/szaman/researchMukul/pgtr/nov8_2020/window_analysis_60perc/02_trees/sequences_control_domain60perc/control/"+str(sample)
+def compareNeighbors(ml_trees_path):
+    samplePath=ml_trees_path
     # r=root, d=directories, f = file
     # print(samplePath)                                                                                       
 
@@ -60,13 +41,11 @@ def compareNeighbors(sample):
 
     return(w1w2, w1w3, w2w3)
 
-def generateDistribution(sample,best_tree_rfs):
+def generateDistribution(threshold,sample,best_tree_rfs):
     print 'sample is: ' + str(sample)
     w1w2s=np.zeros((100))
     w1w3s=np.zeros((100))
     w2w3s=np.zeros((100))
-
-    cwd="/home/FCAM/szaman/researchMukul/pgtr/nov8_2020/window_analysis_60perc/03_bootstrap_trees/sequences_control_domain60perc/control/"
 
     index=0
 
@@ -93,16 +72,6 @@ def generateDistribution(sample,best_tree_rfs):
     hist_w1w3s, b2 = np.histogram(w1w3s, bins=nbin, range=(minimum,maximum))
     hist_w2w3s, b3 = np.histogram(w2w3s, bins=nbin, range=(minimum,maximum))
 
-    #create 95% confidence interval for population mean weight                                               
-    #print(rfs)
-    # print("stats")
-    # print(np.mean(w1w2s))
-    # print(np.std(w1w2s))
-    # print(float(np.std(w1w2s)/math.sqrt(100)))
-    # z=(float(np.std(w1w2s)/math.sqrt(100)))
-    # print(np.mean(w1w2s)-(z*1.96))
-    # print(np.mean(w1w2s)+(z*1.96))
-    
     print("w1w2, w1w3, w2w3")
     print(best_tree_rfs)
 
@@ -157,24 +126,25 @@ def generateDistribution(sample,best_tree_rfs):
     plt.legend()
     plt.savefig('hist_Transfer_'+str(sample)+'.png')
 
-def loopsample(transfers_dict):
-    transfers=transfers_dict
-    for i in range(1,101):                                                                                                                                                                              
-        print(i)                                                                                                                                                                                        
-        if transfers.get(i) != 0:                                                                                                                                                                       
-            print('this sample '+ str(i) +' contains domain transfer events')                                                                                                                          
-            x=compareNeighbors(i)                                                                                                                                                                       
-            generateDistribution(i,x)                                                                                                                                                                   
-        else:                                                                                                                                                                                           
-            print('this sample '+ str(i) +' does not contain any domain transfer events')                                                                                                               
-            x=compareNeighbors(i)                                                                                                                                                                       
-            generateDistribution(i,x) 
+def loopsample(threshold,bootstrap_path, ml_trees_path):
+     x=compareNeighbors(ml_trees_path)                                                                                                                                                                       
+     generateDistribution(threshold,bootstrap_path,x)                                                                                                                                                                   
+
 
 if __name__ == "__main__":
     
-    #x=compareNeighbors(11)
-    #generateDistribution(11,x)
-    domain_samples="/home/FCAM/szaman/researchMukul/pgtr/nov8_2020/domain_transfers.txt"
-    transfers = { int(line.split(":")[0]) : int(line.split(":")[1]) for line in open(domain_samples) }
-    loopsample(transfers)
+     parser = argparse.ArgumentParser(
+     prog='hist_intersection.py',
+     usage='''python hist_intersection.py --thresh [required overlap for gene families ] --bs_sample [gene sample file bootstrapped directory] --ml_sample [name of raxml file for sample]''',
+     description='''determine whether gene family has sub-gene transfer (presence/absence)''',
+     epilog='''It requires numpy and biopython libraries''')
+     parser.add_argument('--sample', type=str, help='The name of the breakpoint file', required=True)
+     parser.add_argument('--raxml', type=str, help='name of the fasta fle', required=True)
+     
+
+     args=parser.parse_args()
+     raxml_tree=args.raxml
+     raxml_samples_dir=args.sample
+    
+     loopsample(threshold,bootstrap_path, ml_trees_path)
     
