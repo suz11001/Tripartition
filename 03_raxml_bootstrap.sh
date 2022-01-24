@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=rax
+#SBATCH --job-name=rax_bs
 #SBATCH --mail-user=sumaira.zaman@uconn.edu
 #SBATCH --mail-type=ALL
 #SBATCH -n 1
@@ -18,6 +18,6 @@ for w in $1/window*; do
     ls -lh $w
     window=$(basename $w)
     echo $window
-    raxmlHPC-PTHREADS -T 6 -f a -x 12345 -p 12345 -s $w -n $window -m $2 -#100 
+    raxmlHPC-PTHREADS -T 6 -b 12345 -p 13579 -# 100 -m $2 -s $w -n $window
 done
 
