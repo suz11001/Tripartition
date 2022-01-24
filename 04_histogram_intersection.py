@@ -119,15 +119,16 @@ def generateDistribution(threshold,sample,best_tree_rfs):
     else:
         print('all rfs are equivalent - not possible to distinguish')
 
+def plot(w1w2s,w1w3s,w2w3s):
 
     plt.hist(w1w2s, bins=nbin, label='w1w2')
     plt.hist(w1w3s, bins=nbin, label='w1w3')
     plt.hist(w2w3s, bins=nbin, label='w2w3')
     plt.legend()
-    plt.savefig('hist_Transfer_'+str(sample)+'.png')
+    plt.savefig('histogram.png')
 
 def loopsample(threshold,bootstrap_path, ml_trees_path):
-     x=compareNeighbors(ml_trees_path)                                                                                                                                                                       
+     x=compareNeighbors(ml_trees_path)
      generateDistribution(threshold,bootstrap_path,x)                                                                                                                                                                   
 
 
@@ -137,14 +138,16 @@ if __name__ == "__main__":
      prog='hist_intersection.py',
      usage='''python hist_intersection.py --thresh [required overlap for gene families ] --bs_sample [gene sample file bootstrapped directory] --ml_sample [name of raxml file for sample]''',
      description='''determine whether gene family has sub-gene transfer (presence/absence)''',
-     epilog='''It requires numpy and biopython libraries''')
-     parser.add_argument('--sample', type=str, help='The name of the breakpoint file', required=True)
-     parser.add_argument('--raxml', type=str, help='name of the fasta fle', required=True)
-     
+     epilog='''It requires numpy, dendropy, scipy libraries''')
+     parser.add_argument('--thresh', type=str, help='minimum overlap required between distributions', required=True)
+     parser.add_argument('--bs_sample', type=str, help='path to bootstrap samples', required=True)
+     parser.add_argument('--ml_sample', type=str, help='path to maximum likelihood trees', required=True)
+     parser.add_argument('--plot', type=bool, help='plot the RF-score distribition between partitions', required=False)
 
      args=parser.parse_args()
-     raxml_tree=args.raxml
-     raxml_samples_dir=args.sample
+     threshold=args.thresh
+     ml_trees_path=args.ml_sample
+     bootstrap_path=args.bs_sample
     
      loopsample(threshold,bootstrap_path, ml_trees_path)
     
