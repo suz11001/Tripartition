@@ -1,0 +1,18 @@
+# GUESTTREEGEN
+Arguments:	[-s, 5316, -rt, 0.5, -max, 250, ./species_trees/species_33/species.pruned.tree, 0.3, 0.6, 0.6, gene]
+Attempts:	2
+No. of vertices:	149
+No. of extant leaves:	75
+No. of speciations:	64
+No. of duplications:	4
+No. of losses:	0
+No. of replacing losses:	0
+No. of additive transfers:	4
+No. of replacing transfers:	2
+Total branch time:	16.619573
+Total branch time beneath host stem:	16.619573
+Duplication ML estimate:	0.24068007
+Loss ML estimate:	0.0
+Replacing Loss ML estimate:	0.0
+Additive Transfer ML estimate:	0.24068007
+Replacing Transfer ML estimate:	0.12034004
