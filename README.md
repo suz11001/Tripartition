@@ -1,5 +1,15 @@
 # Tripartition
 
+## Dependencies
+- Python 2.7.15
+  -DendroPy
+  -Scipy
+  -Numpy
+- RAxML 8.2.11
+
+
+## Overview
+
 Given a gene family multiple sequence alignment, partition the alignment in three approximately equal sized alignments, create maximum likelihood trees, create bootstrap trees, and conduct a statistical analysis for presence/absence of sub-gene/partial gene transfer event.
 
 1. 01_splitFasta.py - Tripartition the multiple sequence alignment:  
@@ -18,3 +28,6 @@ Given a gene family multiple sequence alignment, partition the alignment in thre
    
    command: `python 04_hist_intersection.py --thresh 0.5 --bs_sample /path/to/tripartitioned/bootstrap/trees/ --ml_sample /path/to/tripartitioned/maximum/likelihood/trees/`
 
+## Data Set Availability
+
+Simulated data sets and the scripts used to generate such data are available in the sim_data directory.

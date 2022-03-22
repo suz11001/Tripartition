@@ -32,9 +32,9 @@ def compareNeighbors(ml_trees_path):
     # r=root, d=directories, f = file
     # print(samplePath)                                                                                       
 
-    window1_tree=samplePath+"/window1/RAxML_bestTree.window1"
-    window2_tree=samplePath+"/window2/RAxML_bestTree.window2"
-    window3_tree=samplePath+"/window3/RAxML_bestTree.window3"
+    window1_tree=samplePath+"/RAxML_bestTree.window1"
+    window2_tree=samplePath+"/RAxML_bestTree.window2"
+    window3_tree=samplePath+"/RAxML_bestTree.window3"
     w1w2=calcRF(window1_tree,window2_tree)
     w1w3=calcRF(window1_tree,window3_tree)
     w2w3=calcRF(window2_tree,window3_tree)
@@ -49,10 +49,10 @@ def generateDistribution(threshold,sample,best_tree_rfs):
 
     index=0
 
-    for bootstrap in glob.glob(cwd+str(sample)+'/window1/x*'):
-        filename=(os.path.basename(bootstrap))
-        w2_tree=cwd+str(sample)+'/window2/'+filename
-        w3_tree=cwd+str(sample)+'/window3/'+filename
+    for bootstrap in glob.glob(str(sample)+'/x*.window1_bs'):
+        filename=(os.path.basename(bootstrap)).split(".")[0]
+        w2_tree=str(sample)+'/'+filename+".window2_bs"
+        w3_tree=str(sample)+'/'+filename+".window3_bs"
         w1w2=calcRF(bootstrap,w2_tree)
         w1w3=calcRF(bootstrap,w3_tree)
         w2w3=calcRF(w2_tree,w3_tree)
@@ -110,9 +110,9 @@ def generateDistribution(threshold,sample,best_tree_rfs):
     # if max is w1w2 and min is w2w3
     elif best_tree_rfs.index(max(best_tree_rfs)) == 0 and best_tree_rfs.index(min(best_tree_rfs))==2:
         x=return_intersection(hist_w2w3s,hist_w1w2s)
-    
+
     if x!=None:
-        if x < 0.5:
+        if x < threshold:
             print 'sample ' + str(sample) + ' passed the statistical test with ' + str(x)
         else:
             print 'sample ' + str(sample) + ' failed the statistical test with ' + str(x)
@@ -145,7 +145,7 @@ if __name__ == "__main__":
      parser.add_argument('--plot', type=bool, help='plot the RF-score distribition between partitions', required=False)
 
      args=parser.parse_args()
-     threshold=args.thresh
+     threshold=float(args.thresh)
      ml_trees_path=args.ml_sample
      bootstrap_path=args.bs_sample
     
