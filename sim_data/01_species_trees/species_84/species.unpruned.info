@@ -1,0 +1,10 @@
+# HOSTTREEGEN
+Arguments:	[-s, 24679, -min, 100, -max, 100, -bi, 1.0, 5.0, 2.0, species]
+Attempts:	272
+No. of vertices:	315
+No. of extant leaves:	100
+No. of births:	157
+No. of deaths:	58
+Total branch time:	27.477142
+Birth ML estimate:	5.7138403
+Death ML estimate:	2.1108454
