@@ -1,0 +1,31 @@
+# DOMAINTREEGEN
+Arguments:	[-s, 11893, -rt, 1.0, -ig, 0, -max, 250, species_trees/species_28/species.pruned.tree, gene_trees/genetree_28/prunedGeneTree/, 0, 0, 0.2, domainTree_0.2T]
+Attempts:	2
+No. of vertices:	257
+No. of extant leaves:	129
+No. of co-divergences:	125
+No. of duplications:	0
+No. of losses:	0
+No. of replacing losses:	0
+No. of additive transfers intragene intraspecies:	0
+No. of additive transfers intragene interspecies:	0
+No. of additive transfers intergene intraspecies:	0
+No. of additive transfers intergene interspecies:	0
+No. of replacing transfer events occuring:	3
+No. of replacing transfers intragene intraspecies:	0
+No. of replacing transfers intragene interspecies:	0
+No. of replacing transfers intergene intraspecies:	0
+No. of replacing transfers intergene interspecies:	0
+Total branch time:	27.741208
+Total branch time beneath host stem:	27.741208
+Duplication ML estimate:	0.0
+Loss ML estimate:	0.0
+Replacing Loss ML estimate:	0.0
+Additive Transfer Intragene Intraspecies ML estimate:	0.0
+Additive Transfer Intragene Interspecies ML estimate:	0.0
+Additive Transfer Intergene Intraspecies ML estimate:	0.0
+Additive Transfer Intergene Interspecies ML estimate:	0.0
+Replacing Transfer Intragene Intraspecies ML estimate:	0.0
+Replacing Transfer Intragene Interspecies ML estimate:	0.0
+Replacing Transfer Intergene Intraspecies ML estimate:	0.0
+Replacing Transfer Intergene Interspecies ML estimate:	0.0
