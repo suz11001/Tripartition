@@ -2,9 +2,9 @@
 
 ## Dependencies
 - Python 2.7.15
-  -DendroPy
-  -Scipy
-  -Numpy
+  - DendroPy
+  - Scipy
+  - Numpy
 - RAxML 8.2.11
 
 
