@@ -16,4 +16,7 @@ The commands used to generate these data sets are explained [here](https://githu
    j. scaled_5 = substitution rate is 5  
 
    Note that only one parameter is varied at a time i.e. the default values are used except for the one parameter that we are varying.
+
+The command used to generate the sequences is following (for the baseline dataset):   
+`python3 partial.py -z $random -dl 400 -gl 600 -ap -s 0.5 /path/to/pruned/subgene/tree /path/to/pruned/gene/tree /path/to/mapping/file/`
    
