@@ -1,4 +1,3 @@
-from Bio import AlignIO
 import sys
 
 inputFasta=open(sys.argv[1], "r")
