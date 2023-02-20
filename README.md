@@ -18,7 +18,7 @@ Given a gene family multiple sequence alignment, partition the alignment in thre
 
 1. 01_splitFasta.py - Tripartition the multiple sequence alignment:  
 
-   command: `python 01_splitFasta.py`  
+   command: `python 01_splitFasta.py path/to/fasta/file`  
  
 2. 02_raxml.sh - Generate maximum likelihood trees with RAxML:  
    
