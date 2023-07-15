@@ -1,7 +1,6 @@
 # Trippd (TRi-Partition based Pgt Detection)
 
-Trippd is a prototype implementation of a simple proof-of-concept approach for detecting the presence of partial gene transfer (PGT) (i.e., horizontal transfer of a fragment of a gene) in a given gene family. trippd takes as input a multiple sequence alignment for the gene family under consideration, partitions the sites/columns of the alignment into three roughly equal parts, computes ML trees and bootstrap replicates for each partition, and compares these trees with each other to determine if that gene family has been affected by significant partial gene transfer. Further methodological details are described in the associated RECOMB-CG 2022 paper. trippd can be used to easily identify gene families whose gene trees may have been impacted by the presence of significant partial gene transfer.
-
+Trippd is a prototype implementation of a simple proof-of-concept approach for detecting the presence of partial gene transfer (PGT) (i.e., horizontal transfer of a fragment of a gene) in a given gene family. trippd takes as input a multiple sequence alignment for the gene family under consideration, partitions the sites/columns of the alignment into three roughly equal parts, computes ML trees and bootstrap replicates for each partition, and compares these trees with each other to determine if that gene family has been affected by significant partial gene transfer. Further methodological details are described in the associated RECOMB-CG 2022 paper cited below. Trippd can be used to easily identify gene families whose gene trees may have been impacted by the presence of significant partial gene transfer.
  
 
 ## Dependencies
@@ -35,3 +34,12 @@ Given a gene family multiple sequence alignment, partition the alignment in thre
 ## Data Set Availability
 
 Simulated data sets and the scripts used to generate such data are available in the sim_data directory.
+
+
+## Citing trippd
+
+Trippd can be cited as follows:
+
+<a href="https://compbio.engr.uconn.edu/wp-content/uploads/sites/2447/2022/03/PartialGeneTransfer_RECOMBCG_2022.pdf">On Partial Gene Transfer and its Impact on Gene Tree Reconstruction</a><br>
+Sumaira Zaman, Mukul S. Bansal<br>
+RECOMB Comparative Genomics Conference (RECOMB-CG) 2022; LNBI 13234: 168–186
